@@ -20,7 +20,7 @@ const TopRowButtons = props => {
     <div>
       <Button onClick={props.handleClear}>Clear</Button>
       <Button onClick={props.handlePlusMinus}>+/-</Button>
-      <Button>%</Button>
+      <Button onClick={props.handleModulus}>%</Button>
     </div>
   );
 };

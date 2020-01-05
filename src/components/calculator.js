@@ -60,48 +60,160 @@ class Calculator extends React.Component {
     if (this.state.pastOperator === "") {
       this.setState({ total: tempCurrentNumber, display: tempCurrentNumber });
     }
-    if (this.state.pastOperator === "+") {
+    if (this.state.pastOperator !== "") {
       this.setState({
-        total: this.state.total + tempCurrentNumber,
-        display: tempCurrentNumber
-      });
-    }
-    if (this.state.pastOperator === "-") {
-      this.setState({
-        total: this.state.total - tempCurrentNumber,
-        display: tempCurrentNumber
-      });
-    }
-    if (this.state.pastOperator === "*") {
-      this.setState({
-        total: this.state.total * tempCurrentNumber,
-        display: tempCurrentNumber
-      });
-    }
-    if (this.state.pastOperator === "/") {
-      this.setState({
-        total: this.state.total / tempCurrentNumber,
         display: tempCurrentNumber
       });
     }
   };
-  handleAdd = event => {
-    this.setState({ pastOperator: "+" });
+  handleAdd = () => {
+    let pastOperatorValue = this.state.pastOperator;
+    let tempCurrentTotal = this.state.total;
+    let tempCurrentNumber = this.state.currentNumber;
+    //console.log(tempCurrentTotal, tempCurrentNumber, pastOperatorValue);
+    if (pastOperatorValue !== "") {
+      if (pastOperatorValue === "+") {
+        this.setState({ total: tempCurrentTotal + tempCurrentNumber });
+      }
+      if (pastOperatorValue === "-") {
+        this.setState({ total: tempCurrentTotal - tempCurrentNumber });
+      }
+      if (pastOperatorValue === "*") {
+        this.setState({ total: tempCurrentTotal * tempCurrentNumber });
+      }
+      if (pastOperatorValue === "/") {
+        this.setState({ total: tempCurrentTotal / tempCurrentNumber });
+      }
+      if (pastOperatorValue === "%") {
+        this.setState({ total: tempCurrentTotal % tempCurrentNumber });
+      }
+    }
+    this.setState({
+      pastOperator: "+"
+    });
   };
   handleSubtract = event => {
+    let pastOperatorValue = this.state.pastOperator;
+    let tempCurrentTotal = this.state.total;
+    let tempCurrentNumber = this.state.currentNumber;
+    //console.log(tempCurrentTotal, tempCurrentNumber, pastOperatorValue);
+    if (pastOperatorValue !== "") {
+      if (pastOperatorValue === "-") {
+        this.setState({ total: tempCurrentTotal - tempCurrentNumber });
+      }
+      if (pastOperatorValue === "+") {
+        this.setState({ total: tempCurrentTotal + tempCurrentNumber });
+      }
+      if (pastOperatorValue === "*") {
+        this.setState({ total: tempCurrentTotal * tempCurrentNumber });
+      }
+      if (pastOperatorValue === "/") {
+        this.setState({ total: tempCurrentTotal / tempCurrentNumber });
+      }
+      if (pastOperatorValue === "%") {
+        this.setState({ total: tempCurrentTotal % tempCurrentNumber });
+      }
+    }
     this.setState({ pastOperator: "-" });
   };
   handleMultiply = event => {
+    let pastOperatorValue = this.state.pastOperator;
+    let tempCurrentTotal = this.state.total;
+    let tempCurrentNumber = this.state.currentNumber;
+    //console.log(tempCurrentTotal, tempCurrentNumber, pastOperatorValue);
+    if (pastOperatorValue !== "") {
+      if (pastOperatorValue === "*") {
+        this.setState({ total: tempCurrentTotal * tempCurrentNumber });
+      }
+      if (pastOperatorValue === "+") {
+        this.setState({ total: tempCurrentTotal + tempCurrentNumber });
+      }
+      if (pastOperatorValue === "-") {
+        this.setState({ total: tempCurrentTotal - tempCurrentNumber });
+      }
+      if (pastOperatorValue === "/") {
+        this.setState({ total: tempCurrentTotal / tempCurrentNumber });
+      }
+      if (pastOperatorValue === "%") {
+        this.setState({ total: tempCurrentTotal % tempCurrentNumber });
+      }
+    }
     this.setState({ pastOperator: "*" });
   };
   handleDivide = event => {
+    let pastOperatorValue = this.state.pastOperator;
+    let tempCurrentTotal = this.state.total;
+    let tempCurrentNumber = this.state.currentNumber;
+    //console.log(tempCurrentTotal, tempCurrentNumber, pastOperatorValue);
+    if (pastOperatorValue !== "") {
+      if (pastOperatorValue === "/") {
+        this.setState({ total: tempCurrentTotal / tempCurrentNumber });
+      }
+      if (pastOperatorValue === "*") {
+        this.setState({ total: tempCurrentTotal * tempCurrentNumber });
+      }
+      if (pastOperatorValue === "+") {
+        this.setState({ total: tempCurrentTotal + tempCurrentNumber });
+      }
+      if (pastOperatorValue === "-") {
+        this.setState({ total: tempCurrentTotal - tempCurrentNumber });
+      }
+      if (pastOperatorValue === "%") {
+        this.setState({ total: tempCurrentTotal % tempCurrentNumber });
+      }
+    }
     this.setState({ pastOperator: "/" });
   };
-  handleEquals = () => {
+  handleModulus = () => {
+    let pastOperatorValue = this.state.pastOperator;
+    let tempCurrentTotal = this.state.total;
+    let tempCurrentNumber = this.state.currentNumber;
+    //console.log(tempCurrentTotal, tempCurrentNumber, pastOperatorValue);
+    if (pastOperatorValue !== "") {
+      if (pastOperatorValue === "%") {
+        this.setState({ total: tempCurrentTotal % tempCurrentNumber });
+      }
+      if (pastOperatorValue === "+") {
+        this.setState({ total: tempCurrentTotal + tempCurrentNumber });
+      }
+      if (pastOperatorValue === "-") {
+        this.setState({ total: tempCurrentTotal - tempCurrentNumber });
+      }
+      if (pastOperatorValue === "*") {
+        this.setState({ total: tempCurrentTotal * tempCurrentNumber });
+      }
+      if (pastOperatorValue === "/") {
+        this.setState({ total: tempCurrentTotal / tempCurrentNumber });
+      }
+    }
     this.setState({
-      display: this.state.total,
+      pastOperator: "%"
+    });
+  };
+  handleEquals = () => {
+    let tempCurrentNumber = this.state.currentNumber;
+    let tempCurrentTotal = this.state.total;
+    let newTotal = this.state.total;
+    if (this.state.pastOperator === "+") {
+      newTotal = tempCurrentTotal + tempCurrentNumber;
+    }
+    if (this.state.pastOperator === "-") {
+      newTotal = tempCurrentTotal - tempCurrentNumber;
+    }
+    if (this.state.pastOperator === "*") {
+      newTotal = tempCurrentTotal * tempCurrentNumber;
+    }
+    if (this.state.pastOperator === "/") {
+      newTotal = tempCurrentTotal / tempCurrentNumber;
+    }
+    if (this.state.pastOperator === "%") {
+      newTotal = tempCurrentTotal % tempCurrentNumber;
+    }
+    this.setState({
+      total: newTotal,
+      display: newTotal,
       pastOperator: "=",
-      currentNumber: this.state.total
+      currentNumber: newTotal
     });
   };
   handleClear = () => {
@@ -129,8 +241,8 @@ class Calculator extends React.Component {
         display: tempCurrentDisplay * -1
       });
     }
-    this.setState({ pastOperator: "+/-" });
   };
+
   render() {
     console.log(this.state);
     return (
@@ -143,6 +255,7 @@ class Calculator extends React.Component {
             <TopRowButtons
               handleClear={this.handleClear}
               handlePlusMinus={this.handlePlusMinus}
+              handleModulus={this.handleModulus}
             />
           </TopRowButtonContainer>
           <ButtonContainer>
